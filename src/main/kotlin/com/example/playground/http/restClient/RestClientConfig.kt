@@ -36,9 +36,8 @@ class RestClientConfig {
         .requestInterceptor { request, body, execution ->
             logger.info("Request: ${request.method} ${request.uri}")
                 .let { execution.execute(request, body) }
-                .also { logger.info("Response: ${it.statusCode} ${request.uri}") }
+                .also { logger.info("Response: ${it.statusCode} ${String(it.body.readAllBytes()).take(100)}")}
         }
-
 
 }
 
