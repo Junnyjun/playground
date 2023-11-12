@@ -21,12 +21,19 @@ repositories {
 }
 
 dependencies {
+	//spring
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// database
+	implementation("com.h2database:h2")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.security:spring-security-test")
+
 }
 
 tasks.withType<KotlinCompile> {
