@@ -24,7 +24,7 @@ class SampleJdbcClient(
             ).update()
 
     fun update(): Int = jdbcClient
-            .sql("UPDATE SAMPLE_TABLE SET name = ?1 WHERE id = ?2")
+            .sql("UPDATE SAMPLE_TABLE SET name = :id WHERE id = :name")
             .paramSource(
                 Response(
                     id = 1,
