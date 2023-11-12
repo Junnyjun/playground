@@ -10,7 +10,7 @@ import org.springframework.web.client.RestClient
 
 
 @Configuration
-class RestClientConfig {
+class RestClientConfiguration {
     private val logger = LoggerFactory.getLogger("[SAMPLE API]")
 
     @Bean("sampleapisClient")
