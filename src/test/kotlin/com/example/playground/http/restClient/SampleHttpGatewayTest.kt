@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class SampleHttpGatewayTest{
 
-    val sampleHttpGateway = SampleHttpGateway(RestClientConfig().restClient())
+    val sampleHttpGateway = SampleHttpGateway(RestClientConfiguration().restClient())
 
     @Test
     fun `getSampleApi`(){
