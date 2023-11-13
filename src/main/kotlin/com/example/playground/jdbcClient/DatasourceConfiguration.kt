@@ -1,4 +1,4 @@
-package com.example.playground.http.jdbcClient
+package com.example.playground.jdbcClient
 
 import com.zaxxer.hikari.HikariDataSource
 import org.springframework.boot.jdbc.DataSourceBuilder

@@ -1,4 +1,4 @@
-package com.example.playground.http.jdbcClient
+package com.example.playground.jdbcClient
 
 import org.springframework.jdbc.core.namedparam.SimplePropertySqlParameterSource
 import org.springframework.jdbc.core.simple.JdbcClient

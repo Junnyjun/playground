@@ -1,5 +1,6 @@
 package com.example.playground.http.jdbcClient
 
+import com.example.playground.jdbcClient.SampleJdbcClient
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

@@ -1,9 +1,12 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
   jpa:
     database: h2
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
 
   datasource:
     driver-class-name: org.h2.Driver
