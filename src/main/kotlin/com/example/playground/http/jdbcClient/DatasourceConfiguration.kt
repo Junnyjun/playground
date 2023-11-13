@@ -11,16 +11,7 @@ import javax.sql.DataSource
 class DatasourceConfiguration {
 
     @Bean
-    fun datasource(): DataSource = DataSourceBuilder.create()
-        .type(HikariDataSource::class.java)
-        .driverClassName("org.h2.Driver")
-        .url("jdbc:h2:mem:testdb")
-        .username("sa")
-        .password("")
-        .build()
-
-    @Bean
-    fun jdbcClient():JdbcClient = JdbcClient.create(datasource())
+    fun jdbcClient(datasource:DataSource):JdbcClient = JdbcClient.create(datasource)
 
 
 }

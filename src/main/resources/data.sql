@@ -1,1 +1,0 @@
-insert into SAMPLE_TABLE values(1, 'Hello');
