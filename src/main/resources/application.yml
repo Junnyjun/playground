@@ -13,6 +13,7 @@ spring:
     url: jdbc:h2:tcp://localhost/~/test;DATABASE_TO_UPPER=true;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username: sa
     password:
+
 logging.level:
   org.hibernate.SQL: debug
   org.springframework.jdbc: debug
