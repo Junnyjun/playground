@@ -13,5 +13,4 @@ class DatasourceConfiguration {
     @Bean
     fun jdbcClient(datasource:DataSource):JdbcClient = JdbcClient.create(datasource)
 
-
 }
