@@ -1,5 +1,5 @@
 package git.io.statemachine.state
 
 enum class Status {
-    PENDING, ACTIVE, COMPLETED
+    INIT, PENDING, ACTIVE, COMPLETED
 }
