@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 8761
+
+eureka:
+  server:
+    enable-self-preservation: true
+
+  client:
+    tls:
+      enabled: true
+      key-store: classpath:keystore.jks
+      key-store-password: 132435!
+      key-store-type: JKS
+    service-url:
+        defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+
