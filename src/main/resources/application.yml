@@ -1,10 +1,28 @@
-eureka:
-  client:
-    enabled: true
-    service-url:
-        defaultZone: http://localhost:8761/eureka/
-    instance:
-      hostname: localhost
 spring:
   application:
     name: eureka-client
+
+server:
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: 132435!
+    key-store-type: JKS
+    key-password: 132435!
+    client-auth: need
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://localhost:8761/eureka/
+    tls:
+      key-store: classpath:keystore.jks
+      key-store-password: 132435!
+      key-store-type: JKS
+      key-password: 132435!
+      enabled: true
+    register-with-eureka: true
+
+  instance:
+    hostname: localhost
+    secure-port-enabled: true
+    prefer-ip-address: false
