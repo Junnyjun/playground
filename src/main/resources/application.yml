@@ -5,7 +5,7 @@ spring:
 server:
   port: 8761
   ssl:
-    key-store: classpath:junnyland.jks
+    key-store: classpath:keystore.jks
     key-store-password: 132435!
     key-store-type: JKS
     key-password: 132435!
