@@ -1,1 +1,25 @@
-spring.application.name=kakfa
+spring:
+  cloud:
+    function:
+      definition: kafkaConsumer;
+    stream:
+      kafka:
+        bindings:
+          producer-out-0:
+            producer:
+              configuration:
+                key:
+                  serializer: org.apache.kafka.common.serialization.StringSerializer
+          kafkaConsumer-in-0:
+            consumer:
+              configuration:
+                key:
+                  deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        binder:
+          brokers: 146.56.115.136:10002,146.56.115.136:10003,146.56.115.136:10004
+      bindings:
+        producer-out-0:
+          destination: junnyland # topic
+          contentType: application/json
+        kafkaConsumer-in-0:
+          destination: junnyland
