@@ -13,7 +13,7 @@ class MessageComponent(
     private val log = LoggerFactory.getILoggerFactory().getLogger("MessageComponent")
 
     init {
-        streamsBuilder.stream<String, String>("insert-only.employees.employee_name")
+        streamsBuilder.stream<String, String>("all-copy.employees.dept_emp")
             .peek{ key, value -> log.info("[$key]Received message: $value") }
             .map({ key, value -> KeyValue(key, value + "Changed") })
             .to("message-changed")
