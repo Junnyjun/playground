@@ -63,6 +63,12 @@ Content-Type: application/json
 "database.password": 1234,
 "table.include.list": ".*",
 "snapshot.mode": "initial",
-"lock.mode": "none"
+"lock.mode": "none",
+
+  "errors.tolerance": "all",
+  "errors.deadletterqueue.topic.name": "dead-letter-topic",
+  "errors.deadletterqueue.context.headers.enable": "true",
+  "errors.log.enable": "true",
+  "errors.log.include.messages": "true"
 }
 }
