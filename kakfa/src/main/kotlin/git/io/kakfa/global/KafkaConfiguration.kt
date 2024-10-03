@@ -25,11 +25,12 @@ class KafkaConfiguration {
         ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to "146.56.115.136:10000,146.56.115.136:10001,146.56.115.136:10002",
         ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
         ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to JsonDeserializer::class.java,
-        ProducerConfig.ACKS_CONFIG to "all"
+        ProducerConfig.ACKS_CONFIG to "all",
+        ConsumerConfig.GROUP_ID_CONFIG to "kafka-group"
         ))
 
     @Bean
-    fun consumerFactory(): ConsumerFactory<String, String> = DefaultKafkaConsumerFactory(
+    fun kafkaConsumerFactory(): ConsumerFactory<String, String> = DefaultKafkaConsumerFactory(
         mapOf(
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to "146.56.115.136:10000,146.56.115.136:10001,146.56.115.136:10002",
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
