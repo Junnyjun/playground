@@ -14,6 +14,7 @@ import java.lang.Exception
 import java.time.Duration
 import java.time.temporal.TemporalUnit
 import java.util.*
+import java.util.concurrent.atomic.AtomicLong
 
 private val log = LoggerFactory.getLogger("KafkaClientTest")
 
@@ -23,12 +24,16 @@ class KafkaClientTest {
     @Test
     fun sendTest() {
         val producer = KafkaProducer<String, String>(ProducerConfiguration().config())
+        producer.initTransactions()
+        AtomicLong(0).incrementAndGet()
+
         val send = producer.send(ProducerRecord(topic, "value"),ProducerCallback())
 
         val get = send.get()
 
 
         producer.flush()
+
         producer.close()
     }
 
