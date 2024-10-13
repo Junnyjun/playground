@@ -25,7 +25,6 @@ class KafkaClientTest {
     fun sendTest() {
         val producer = KafkaProducer<String, String>(ProducerConfiguration().config())
         producer.initTransactions()
-        AtomicLong(0).incrementAndGet()
 
         val send = producer.send(ProducerRecord(topic, "value"),ProducerCallback())
 
