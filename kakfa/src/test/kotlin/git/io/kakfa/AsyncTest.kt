@@ -2,6 +2,7 @@ package git.io.kakfa
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.Continuation
@@ -52,4 +53,69 @@ class AsyncTest {
 
         doStep.resume(Unit) // 출근해서 일하기
     }
+
+
+    suspend fun procStep(label: Int): Int {
+        return label + 1
+    }
+
+    suspend fun rollbackStep(label: Int): Int {
+        return label - 1
+    }
+
+
+    suspend fun fetchData(step: Int): String {
+        delay(1000 * step.toLong()) // 네트워크 지연을 모사
+        return "데이터 $step 수신 완료"
+    }
+
+    suspend fun doStep(label: Int) {
+        when (label) {
+            1 -> {
+                println("집에서 준비하기")
+                val data = fetchData(1)
+                println(data)
+            }
+            2 -> {
+                println("나가서 이동하기")
+                val data = fetchData(2)
+                println(data)
+            }
+            3 -> {
+                println("출근해서 일하기")
+                val data = fetchData(3)
+                println(data)
+            }
+        }
+    }
+
+     fun fetchData(): String {
+        // 네트워크 요청 등 시간이 걸리는 작업
+        println("processData: ${Thread.currentThread().name}")
+        println("데이터 수신 완료")
+        return "데이터 수신 완료"
+    }
+
+     fun processData(): String {
+        // 데이터 처리 로직
+        // Print courtine thread
+        println("processData: ${Thread.currentThread().name}")
+        return "처리된"
+    }
+
+      fun exampleCoroutine() {
+        val data = fetchData()
+        val result = processData()
+         // Print courtine thread
+        println("result: $result")
+    }
+    @Test
+    fun test3() {
+        runBlocking {
+            async {
+                exampleCoroutine()
+            }
+        }
+    }
+
 }
