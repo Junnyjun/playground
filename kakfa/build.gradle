@@ -29,6 +29,11 @@ dependencies {
 	// kafka client
 	implementation 'org.apache.kafka:kafka-clients'
 
+	// coroutine
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
