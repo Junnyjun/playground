@@ -50,6 +50,17 @@ class KafkaClientTest {
             }
         }
     }
+    @Test
+    open fun sendWithTransactionTest(){
+        val producer = KafkaProducer<String, String>(ProducerConfiguration().config())
+        producer.initTransactions()
+        producer.beginTransaction()
+        val send = producer.send(ProducerRecord(topic, "value"),ProducerCallback())
+        val get = send.get()
+        producer.commitTransaction()
+        producer.flush()
+        producer.close()
+    }
 
 
     class ProducerConfiguration {
