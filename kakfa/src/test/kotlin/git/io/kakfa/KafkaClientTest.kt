@@ -24,8 +24,8 @@ class KafkaClientTest {
     @Test
     fun sendTest() {
         val producer = KafkaProducer<String, String>(ProducerConfiguration().config())
+
         producer.initTransactions()
-        AtomicLong(0).incrementAndGet()
 
         val send = producer.send(ProducerRecord(topic, "value"),ProducerCallback())
 
@@ -50,6 +50,17 @@ class KafkaClientTest {
             }
         }
     }
+    @Test
+    open fun sendWithTransactionTest(){
+        val producer = KafkaProducer<String, String>(ProducerConfiguration().config())
+        producer.initTransactions()
+        producer.beginTransaction()
+        val send = producer.send(ProducerRecord(topic, "value"),ProducerCallback())
+        val get = send.get()
+        producer.commitTransaction()
+        producer.flush()
+        producer.close()
+    }
 
 
     class ProducerConfiguration {
@@ -60,6 +71,7 @@ class KafkaClientTest {
         }
     }
     class ProducerCallback : Callback{
+
         override fun onCompletion(p0: RecordMetadata?, p1: Exception?) {
             p1
                 ?.let { log.error("Error => ${p1.message}") }
@@ -80,6 +92,7 @@ class KafkaClientTest {
     open class CustomConsumerReBalanceListener(
         private val consumer: KafkaConsumer<String, String>
     ): ConsumerRebalanceListener {
+
         override fun onPartitionsRevoked(p0: MutableCollection<org.apache.kafka.common.TopicPartition>?) {
             log.info("Partitions revoked => ${p0.toString()}")
         }

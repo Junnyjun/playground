@@ -13,7 +13,7 @@ interface SampleController {
     @Controller
     class SampleMessageController(){
 
-        @KafkaListener(topics = ["all-copy.employees.salaries"], groupId = "sample")
+        @KafkaListener(topics = ["all-copy.employees.salaries"], concurrency = "3", groupId = "sample")
         fun sampleMessage(message: String){
             println("Received message: $message")
         }

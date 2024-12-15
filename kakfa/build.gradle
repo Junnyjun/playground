@@ -19,6 +19,15 @@ repositories {
 }
 
 
+ext {
+	set('springCloudVersion', "2024.0.0")
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
@@ -29,9 +38,19 @@ dependencies {
 	// kafka client
 	implementation 'org.apache.kafka:kafka-clients'
 
+	// coroutine
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+
+	// cloud
+	implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+	implementation 'org.springframework.cloud:spring-cloud-starter-integration'
+	implementation 'org.springframework.integration:spring-integration-core'
 }
 
 
