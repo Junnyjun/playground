@@ -8,6 +8,7 @@ import org.springframework.integration.jdbc.JdbcPollingChannelAdapter
 import javax.sql.DataSource
 import org.springframework.integration.jdbc.dsl.Jdb
 import org.springframework.integration.jpa.core.JpaExecutor
+import org.springframework.integration.jpa.dsl.Jpa
 
 @Configuration
 @EnableIntegration
@@ -19,9 +20,22 @@ class DBintegration(
 	@Bean
 	fun dbIntegrationFlow(): IntegrationFlow {
 		return IntegrationFlow.from(
-			JpaExecutor(dataSource,)
-				"SELECT * FROM test_table")
+			Jpa.inboundAdapter()
+
+		}.get(
+
 		)
 
 	}
+
+@Bean
+fun jpaExecutor(): JpaExecutor {
+	val jpaExecutor = JpaExecutor()
+	jpaExecutor.setEntityClass(Message::class.java)
+	jpaExecutor.setJpaQuery("from Message where processed = false")
+	jpaExecutor.setDeleteAfterPoll(false)
+	jpaExecutor.setDeleteInBatch(false)
+	return jpaExecutor
+}
+
 }

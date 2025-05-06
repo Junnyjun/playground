@@ -7,7 +7,6 @@
                 "@modelcontextprotocol/server-brave-search"
             ],
             "env": {
-                "BRAVE_API_KEY": "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"
             }
         },
         "filesystem": {
