@@ -8,18 +8,29 @@ import org.springframework.integration.config.EnableIntegration
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.jpa.core.JpaExecutor
 import org.springframework.integration.jpa.dsl.Jpa
+import org.springframework.integration.scheduling.PollerMetadata
+import org.springframework.transaction.PlatformTransactionManager
 
 @Configuration
 @EnableIntegration
 class DBintegration(
-	private val entitiManagerFactory: EntityManagerFactory
+	private val entitiManagerFactory: EntityManagerFactory,
+	private val transactionManager: PlatformTransactionManager
 ) {
 	@Bean
-	fun dbIntegrationFlow(): IntegrationFlow {
+	fun dbIntegrationFlow(pollerMetadata: PollerMetadata): IntegrationFlow {
 		return IntegrationFlow.from(
 			Jpa.inboundAdapter(entitiManagerFactory)
-		) {
-		}.get()
+				.entityClass(Message::class.java)
+				.deleteInBatch(true)
+		) {adapter ->
+			adapter
+				.sendTimeout(10L)
+				.poller { poller -> poller.fixedDelay(4L)
+					.transactional(transactionManager)
+				}
+		}.channel { channels -> channels.executor { runnable -> } }
+			.get()
 	}
 
 	private fun processMessage(message: Any) {
