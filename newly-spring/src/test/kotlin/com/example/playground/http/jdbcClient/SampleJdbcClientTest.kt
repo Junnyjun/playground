@@ -15,7 +15,7 @@ import javax.sql.DataSource
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = NONE)
 class SampleJdbcClientTest{
-
+f
     @Autowired
     lateinit var datasource: DataSource
 
