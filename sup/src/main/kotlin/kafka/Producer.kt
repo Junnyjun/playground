@@ -18,7 +18,6 @@ class Producer(
 			it[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java.name
 			it[ProducerConfig.ACKS_CONFIG] = "1"
 			it[ProducerConfig.RETRIES_CONFIG] = "3"
-			it[ProducerConfig.TRANSACTIONAL_ID_CONFIG] = "TRX_TEST"
 		}.let {
 			KafkaProducer(it)
 		}
