@@ -24,7 +24,9 @@ class Consumer(
 		consumer.subscribe(listOf(topic))
 		consumer.poll(Long.MAX_VALUE).forEach {
 			println("Received: ${it.value()}")
+			consumer.commitAsync()
 		}
+
 	}
 }
 
