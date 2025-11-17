@@ -3,6 +3,7 @@ package io.junnyland.kafka
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.serialization.StringDeserializer
+import java.time.Duration.ofMillis
 import java.util.Properties
 
 class Consumer(
@@ -22,9 +23,10 @@ class Consumer(
 
 	fun receive() {
 		consumer.subscribe(listOf(topic))
-		consumer.poll(Long.MAX_VALUE).forEach {
-			println("Received: ${it.value()}")
+		consumer.poll(ofMillis(1000)).forEach { record ->
+			println("Received: ${record.value()}")
 		}
+		consumer.close()
 	}
 }
 
